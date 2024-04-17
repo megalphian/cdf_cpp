@@ -213,7 +213,7 @@ void GetNextState(cs::RobotState& state)
 
         g_dialog->SetCurrentRobotPlan(plan);
         s = g_planner->planObj_.getWaypoint();
-        return;
+        // return;
     }
 
     cs::CoveredCellsLookup covered;

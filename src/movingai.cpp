@@ -175,7 +175,7 @@ void MovingAI::readFile()
     std::stringstream ss;
 
     std::getline(FILE, line);
-    assert(line.compare("type octile") == 0);
+    assert(line.compare("type octile") >= 0);
 
     // read height/width
     std::getline(FILE, line);
@@ -210,7 +210,7 @@ void MovingAI::readFile()
     }
 
     std::getline(FILE, line);
-    assert(line.compare("map") == 0);
+    assert(line.compare("map") >= 0);
 
     m_map = (MAP_t)calloc(m_h * m_w, sizeof(decltype(*m_map)));
     for (int r = 0; r < m_h; ++r)
