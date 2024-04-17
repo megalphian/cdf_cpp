@@ -69,6 +69,9 @@ void RobotItem::advance(int phase)
     cs::RobotState updatedState;
     cbUpdateRobotPosition_(updatedState);
 
+    std::cout << "RobotItem::advance: updatedState: " << updatedState.empty() << std::endl;
+    std::cout << "RobotItem::advance: updatedState: " << updatedState[0] << ", " << updatedState[1] << ", " << updatedState[2] << std::endl;
+
     int counter = 0;
     int max_counter = 150000;
     while(updatedState.empty()) {
@@ -80,11 +83,11 @@ void RobotItem::advance(int phase)
         }
     }
 
-    std::cout << "RobotItem::advance: updatedState: " << updatedState[0] << ", " << updatedState[1] << ", " << updatedState[2] << std::endl;
-
     setRotation(qRadiansToDegrees(updatedState[2]));
     setPos(updatedState[0], updatedState[1]);
     // printf("  position: (%f, %f)\n", (pos().x() / kOneCellPx), (pos().y() / kOneCellPx));
+
+    std::cout << "HERE 4" << std::endl;
 }
 
 } // namespace vis

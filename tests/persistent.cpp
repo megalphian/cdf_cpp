@@ -142,6 +142,8 @@ void GetNextState(cs::RobotState& state)
     cs::RobotState s;
     s = g_planner->planObj_.getWaypoint();
 
+    std::cout << "HERE 1" << std::endl;
+
     /// If next state not available, query planner for new plan.
     if (s.empty())
     {
@@ -216,6 +218,15 @@ void GetNextState(cs::RobotState& state)
         // return;
     }
 
+    std::cout << "HERE 2" << std::endl;
+
+    // set state for visualization
+    state = {
+        s[0] * vis::kOneCellPx,
+        s[1] * vis::kOneCellPx,
+        s[2]
+    };
+
     cs::CoveredCellsLookup covered;
     SensorFootprintAbsolute(s[0], s[1], covered);
     for (auto xycell : covered)
@@ -234,12 +245,9 @@ void GetNextState(cs::RobotState& state)
         g_coverage_log << s[0] << "," << s[1] << "," << s[2] << "," << s[3] << "," << g_planner->numCoveredCells_ << std::endl;
     }
 
-    // set state for visualization
-    state = {
-        s[0] * vis::kOneCellPx,
-        s[1] * vis::kOneCellPx,
-        s[2]
-    };
+    std::cout << "HERE 3" << std::endl;
+
+    std::cout << "GetNextState: " << state[0] << ", " << state[1] << ", " << state[2] << std::endl;
 }
 
 void GetCurrentGoalState(cs::RobotState& state)

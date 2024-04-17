@@ -42,7 +42,7 @@ const int kXOrigin = 0;
 const int kYOrigin = 0;
 const int kSceneXLength = 50 * kOneCellPx;
 const int kSceneYLength = 100 * kOneCellPx;
-const int kTimerTick_ms = 10;
+const int kTimerTick_ms = 100;
 
 const int kMapXLength = 30;
 const int kMapYLength = 50;
