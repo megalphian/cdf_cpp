@@ -69,14 +69,25 @@ void RobotItem::advance(int phase)
     cs::RobotState updatedState;
     cbUpdateRobotPosition_(updatedState);
 
-    if (updatedState.empty()) {
-        printf("RoboItem::advance: Robot state not available\n");
-        return;
+    std::cout << "RobotItem::advance: updatedState: " << updatedState.empty() << std::endl;
+    std::cout << "RobotItem::advance: updatedState: " << updatedState[0] << ", " << updatedState[1] << ", " << updatedState[2] << std::endl;
+
+    int counter = 0;
+    int max_counter = 150000;
+    while(updatedState.empty()) {
+        // printf("RoboItem::advance: Robot state not available\n");
+        counter++;
+        if (counter > max_counter) {
+            printf("RoboItem::advance: Robot state not available, aborting\n");
+            return;
+        }
     }
 
     setRotation(qRadiansToDegrees(updatedState[2]));
     setPos(updatedState[0], updatedState[1]);
     // printf("  position: (%f, %f)\n", (pos().x() / kOneCellPx), (pos().y() / kOneCellPx));
+
+    std::cout << "HERE 4" << std::endl;
 }
 
 } // namespace vis

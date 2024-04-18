@@ -71,6 +71,7 @@ auto Planner::SetMap(const std::string& mapfile) -> std::pair<int,int>
         }
     }
     }
+    std::cout << "numCellsToCover_ = " << numCellsToCover_ << std::endl;
     return std::pair<int,int>{ env_->rows_, env_->cols_ };
 }
 
