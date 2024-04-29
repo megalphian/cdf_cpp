@@ -6,9 +6,9 @@ const std::map<char, int> MOVINGAI_DICT =
 {
 	{'C', 1}, /* COVERED     */ /// movingai: traversable
 	{'N', 2}, /* NOT COVERED */ /// movingai: water is only traversible from water
-	{'O', 0}  /* OBSTACLE    */ /// movingai: not traversable (obstacle)
-	// {'.', 1}, // traversable
-	// {'@', -1}, // out of bounds
+	{'O', 0},  /* OBSTACLE    */ /// movingai: not traversable (obstacle)
+	{'.', 2}, // traversable
+	{'@', 0}, // out of bounds
 	// {'O', -1}, // out of bounds
 	// {'S', 1},
 	// {'(', 4}, // start

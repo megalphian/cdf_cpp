@@ -240,6 +240,8 @@ void GetNextState(cs::RobotState& state)
         s[1] * vis::kOneCellPx,
         s[2]
     };
+
+    printf("  state: %f, %f, %f\n", state[0], state[1], state[2]);
 }
 
 void GetCurrentGoalState(cs::RobotState& state)
@@ -251,17 +253,20 @@ int main(int argc, char** argv)
 {
     using namespace cs;
 
-    if (argc < 4)
+    if (argc < 7)
     {
         printf("Need more arguments!\n");
-        printf("Usage: ./persistent [path to map] [path to pattern file] [sense-travel-cost ratio (lambda)\n");
-        printf("Example: ./persistent ../maps/corridors_and_rooms/0.map ../patterns/patterns_20_20.txt 2.0\n");
+        printf("Usage: ./persistent [path to map] [path to pattern file] [sense-travel-cost ratio (lambda) (start_x) (start_y) (start_theta)\n");
+        printf("Example: ./persistent ../maps/corridors_and_rooms/0.map ../patterns/patterns_20_20.txt 2.0 \n");
         exit (EXIT_FAILURE);
     }
 
     std::string map_file_path(argv[1]);
     std::string patterns_file_path(argv[2]);
     double sense_travel_ratio = std::stoi(argv[3]);
+    double start_x = std::stod(argv[4]);
+    double start_y = std::stod(argv[5]);
+    double start_theta = std::stod(argv[6]);
 
     std::ifstream mprimFileStream(g_mprimPath);
     std::ifstream macroactionFileStream(patterns_file_path);
@@ -304,12 +309,14 @@ int main(int argc, char** argv)
 
     if (kEnvironment == XY)
     {
-        g_startState = { 1.0, 20.0 };
+        g_startState = { 37.0, 30.0 };
     }
     else if (kEnvironment == XYTHETA)
     {
-        g_startState = { 1.0, 1.0, 0.0 };
+        g_startState = { start_x, start_y, start_theta };
     }
+    std::cout << "Start state: " << g_startState[0] << ", " << g_startState[1] << ", " << g_startState[2] << std::endl;
+
     g_planner = std::make_unique<Planner>();
     g_planner->Init(sense_travel_ratio);
 
